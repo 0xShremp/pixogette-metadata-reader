@@ -6,7 +6,6 @@
   "type": "module",
   "scripts": {
     "dev": "http-server -P https://ordiscan.com --cors",
-    "build": "vite build",
     "minify": "npx tsx scripts/minify.ts",
     "start": "cd dist && http-server -P https://ordiscan.com --cors"
   },

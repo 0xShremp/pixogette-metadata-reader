@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/content/8f8d050802f726a0c1457377a3e888fa71ef97dbbe6a29f672c7a59f8fa39d26i0"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PIXOGETTE</title>
+    <style>
+      @font-face {
+        font-family: "IBM CGA";
+        src: url(/content/1de0624cc8d55981d133b788bdb6f7ca37f016b6d16461a60eb99e3ba92d6b04i0);
+      }
+
+      * {
+        box-sizing: border-box;
+        font-family: "IBM CGA";
+        line-height: 1.5;
+      }
+
+      body,
+      #root {
+        height: 100%;
+        width: 100%;
+      }
+
+      .app {
+        height: 100%;
+        width: 100%;
+        background: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, serif;
+      }
+
+      * {
+        box-sizing: border-box;
+        font-family: IBM CGA;
+        line-height: 1.5;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: IBM CGA;
+        font-size: 10px;
+        -moz-osx-font-smoothing: unset;
+        -webkit-font-smoothing: none;
+        text-rendering: optimizeSpeed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        overflow: auto;
+      }
+
+      h1 {
+        font-size: 19px;
+      }
+
+      #app {
+        width: 100vw;
+        height: 100vh;
+      }
+
+      .bg-container {
+        position: fixed;
+        display: grid;
+        grid-template-columns: repeat(16, calc(100vh / 16));
+        grid-template-rows: repeat(16, calc(100vh / 16));
+        height: auto;
+        margin: 0 auto;
+        z-index: 1;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%);
+      }
+
+      @media screen and (min-width: 640px) {
+        .bg-container {
+          grid-template-columns: repeat(24, calc(100vh / 24));
+          grid-template-rows: repeat(24, calc(100vh / 24));
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .bg-container {
+          grid-template-columns: repeat(32, calc(100vw / 32));
+          grid-template-rows: repeat(32, calc(100vw / 32));
+        }
+      }
+
+      .box {
+        width: 100%;
+        height: 100%;
+      }
+
+      .box:first-child {
+        grid-row: 1 / 1;
+        grid-column: 1 / 1;
+      }
+
+      .ui {
+        width: 100%;
+        background-color: #ffffffd9;
+        transition: background-color 0.5s ease-in-out;
+        z-index: 1;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .splash {
+        width: 100%;
+        max-width: 512px;
+        text-align: center;
+        margin: 0 auto;
+        padding: 8px;
+        background-color: #fff;
+      }
+
+      .form-container {
+        padding: 2rem;
+        width: 100%;
+        height: 100vh;
+        max-width: 512px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-y: scroll;
+      }
+
+      .row {
+        background-color: #fff;
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 8px;
+      }
+
+      .forms {
+        display: flex;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+
+      .trait-box {
+        background-color: #fff;
+        margin: 0.25rem;
+        padding: 0.5rem;
+        display: inline-block;
+      }
+
+      .trait-box p {
+        margin: 4px;
+      }
+
+      .trait-name {
+        font-weight: 700;
+        font-size: 10px;
+        margin-bottom: 0.25rem;
+        opacity: 0.75;
+      }
+
+      .metadata-container {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 100%;
+        max-height: 200px;
+        overflow-y: auto;
+        margin-bottom: 10px;
+      }
+
+      .metadata-wrapper {
+        width: 512px;
+        margin: 0 auto;
+      }
+
+      img.inscription-image {
+        display: block;
+        width: 100%;
+        image-rendering: pixelated;
+      }
+
+      #mainContent {
+        display: none;
+        position: relative;
+        z-index: 1;
+        max-width: 100%;
+      }
+
+      form {
+        padding: 8px;
+        height: 100%;
+        width: 100%;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      button,
+      input,
+      label {
+        font-size: inherit;
+      }
+
+      button {
+        font-family: inherit;
+        background-color: #fff;
+        border: none;
+        cursor: pointer;
+        padding: 8px 16px;
+        font-size: 16px;
+        transition: background-color 0.3s;
+        line-height: 1.25;
+      }
+
+      button:hover,
+      input[type="button"]:hover,
+      input[type="file"]:hover {
+        background-color: #f0f0f0;
+      }
+
+      input[type="button"],
+      input[type="text"],
+      input[type="file"] {
+        height: 40px;
+        border: none;
+        font-family: inherit;
+        background-color: #f0f0f0;
+        padding: 8px;
+        font-size: 14px;
+        transition: background-color 0.3s;
+        width: 100%;
+      }
+
+      input[type="text"]:hover,
+      input[type="text"]:focus {
+        outline: 0;
+        border: none;
+        background-color: #e7e7e7;
+      }
+
+      select {
+        height: 40px;
+        border: none;
+        background-color: #f0f0f0;
+        font-size: 14px;
+        padding: 8px;
+        color: #757575;
+        transition: background-color 0.3s;
+      }
+
+      select:hover,
+      select:focus {
+        outline: 0;
+        border: none;
+        background-color: #e7e7e7;
+      }
+
+      @media only screen and (max-width: 600px) {
+        input,
+        select {
+          font-size: 12px;
+        }
+      }
+
+      @keyframes colorChange {
+        0%,
+        6.25% {
+          color: #16171a;
+        }
+
+        12.5%,
+        6.25% {
+          color: #7f0622;
+        }
+
+        12.5%,
+        18.75% {
+          color: #d62411;
+        }
+
+        18.75%,
+        25% {
+          color: #ff8426;
+        }
+
+        25%,
+        31.25% {
+          color: #ffd100;
+        }
+
+        31.25%,
+        37.5% {
+          color: #fafdff;
+        }
+
+        37.5%,
+        43.75% {
+          color: #ff80a4;
+        }
+
+        43.75%,
+        50% {
+          color: #ff2674;
+        }
+
+        50%,
+        56.25% {
+          color: #94216a;
+        }
+
+        56.25%,
+        62.5% {
+          color: #430067;
+        }
+
+        62.5%,
+        68.75% {
+          color: #234975;
+        }
+
+        68.75%,
+        75% {
+          color: #68aed4;
+        }
+
+        75%,
+        81.25% {
+          color: #bfff3c;
+        }
+
+        81.25%,
+        87.5% {
+          color: #10d275;
+        }
+
+        87.5%,
+        93.75% {
+          color: #007899;
+        }
+
+        to,
+        93.75% {
+          color: #002859;
+        }
+      }
+
+      .color-changing {
+        animation: colorChange 3.2s steps(16) infinite;
+      }
+    </style>
+  </head>
+  <body style="height: 100vh; width: 100vw; margin: 0px; overflow: hidden">
+    <div id="root"></div>
+    <audio id="aman" preload="auto">
+      <source
+        src="/content/785963a1cbc9dbac622107f3500392a4303eef3566fdf75d51fae78781952fdai0"
+      />
+    </audio>
+    <audio id="bebi" preload="auto">
+      <source
+        src="/content/50e388d8f968b269a4bc283b67fed63d56b65d35209eee6acb6fe564117f1f38i0"
+      />
+    </audio>
+    <audio id="ctcd" preload="auto">
+      <source
+        src="/content/f8e4cdc1d8e023932edd2b92b7541831313132c1a1834f1be551f24219f3d4bfi0"
+      />
+    </audio>
+    <audio id="kill" preload="auto">
+      <source
+        src="/content/01381d436508c61041541b66ef8bc6e70ae8dc08e189095554ad0602840934e0i0"
+      />
+    </audio>
+    <audio id="non0" preload="auto">
+      <source
+        src="/content/b8b69b35122b050b1f4600f0fd31be43b3398326267a421f80dd1e22610ef7d1i0"
+      />
+    </audio>
+    <audio id="non1" preload="auto">
+      <source
+        src="/content/9e43ee939f64e5134e52a9e00c2615441d0797f41db77fb3230cf8fccc4af60ai0"
+      />
+    </audio>
+    <audio id="non2" preload="auto">
+      <source
+        src="/content/a9c2ee1c716fa3f28a3f23a338d17bebb6e65b21e948ea00b571aa9ad3e674ebi0"
+      />
+    </audio>
+    <audio id="non3" preload="auto">
+      <source
+        src="/content/384e9865634d508ed4f8c5029e57a9aa305b8037f3ee8f1b6320901d8893884bi0"
+      />
+    </audio>
+    <audio id="non4" preload="auto">
+      <source
+        src="/content/8c16d86b60bb765ff243e9d78bab564293b610b2ebc8bcff0b6e66ba5b724e31i0"
+      />
+    </audio>
+    <audio id="non5" preload="auto">
+      <source
+        src="/content/beccdb946b1004890d1b82118115dd5269c3d0b67d8217ce552b15602f288e79i0"
+      />
+    </audio>
+    <audio id="non6" preload="auto">
+      <source
+        src="/content/6a6aeb894c0c6135e82c95898d3542f5056c483dbba72da1ab2af21dbe2659bei0"
+      />
+    </audio>
+    <audio id="non7" preload="auto">
+      <source
+        src="/content/6d21479fbd8605ee6a8ab375b2d28b79a516bc308e48ba94e29d97b69bc1a0f5i0"
+      />
+    </audio>
+    <audio id="non8" preload="auto">
+      <source
+        src="/content/5de12493d21d1c7bd1a142a9cf16da33c53f29e569cd6ad60cfff4d24ce11431i0"
+      />
+    </audio>
+    <audio id="non9" preload="auto">
+      <source
+        src="/content/8af8e0ab32ebe17a004d9c6e6f5175ee17f51c11b8faa6b9c9208750c6fd7faei0"
+      />
+    </audio>
+    <audio id="rar1" preload="auto">
+      <source
+        src="/content/7d0c0beab5e55dae0ccd569ef9792979f09d6e48dcd0ca3aafef19617474b1bbi0"
+      />
+    </audio>
+    <audio id="rar2" preload="auto">
+      <source
+        src="/content/9d06e9847640454c7d802e482b70726d6e439e526c76c0689e5ae22d9968c845i0"
+      />
+    </audio>
+    <audio id="rar3" preload="auto">
+      <source
+        src="/content/fd29e8012913e4371af828f227c30bcadda243c160bf2b9e29598873e22e7c1ci0"
+      />
+    </audio>
+    <audio id="wait" preload="auto">
+      <source
+        src="/content/b3ee9033763887a69d419cdc3191bb567128c510edfdc173cbb774f3e658c360i0"
+      />
+    </audio>
+    <audio id="rich" preload="auto">
+      <source
+        src="/content/1dc808aa020d7d0b66260d0278758768791aecadc69b32866a40d343dc7015fdi0"
+      />
+    </audio>
+    <audio id="plan" preload="auto">
+      <source
+        src="/content/a7354c56501b5b0294d1d0813aa4ac56426944b17463d15b3e18b75b228d9431i0"
+      />
+    </audio>
+    <audio id="dldo" preload="auto">
+      <source
+        src="/content/c0d9f08b26882d520c642d03900073754c25080e3f4da0e0d9261e0798a8f15ei0"
+      />
+    </audio>
+    <audio id="matr" preload="auto">
+      <source
+        src="/content/b99397826093826e7df6ceed04de288f75da994e807805408586ca15fb2f4730i0"
+      />
+    </audio>
+    <audio id="pixogette" loop preload="auto">
+      <source
+        src="/content/917604614ee5acdc9c1ee51f1957c9aa0e101c1b168836f690544a519644fecfi0"
+      />
+    </audio>
+    <script type="module">
+      import "/content/faa7b9b0b7884360f6c2b34693855a0d60df5f344727c72e3691a80f84ec6a81i0";
+      import { decompressSync } from "/content/f815bd5c566c6e46de5cdb6ccb3a7043c63deeba61f4234baea84b602b0d4440i0";
+      import { decode } from "/content/077fbf9e2d8c405e5f276220ed83c029eb86ecc1bd22a60a63a43eb925f28636i0";
+
+      const exifrResponse = await fetch(
+        `/content/2877a6fe295d15d4acf65d714dc37fa6920439aa87d44854bda8f88deea7ab22i0`
+      );
+
+      const exifrCompressed = new Uint8Array(await exifrResponse.arrayBuffer());
+      const exiftInflated = await decompressSync(exifrCompressed);
+      const exifr_string = new TextDecoder().decode(exiftInflated);
+      eval(exifr_string);
+
+      /*
+       * CONSTANTS
+       */
+
+      const LOADING = "Loading";
+      const KONAMI_CODE = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+      const COLORS = [
+        "#16171a",
+        "#7f0622",
+        "#d62411",
+        "#ff8426",
+        "#ffd100",
+        "#fafdff",
+        "#ff80a4",
+        "#ff2674",
+        "#94216a",
+        "#430067",
+        "#234975",
+        "#68aed4",
+        "#bfff3c",
+        "#10d275",
+        "#007899",
+        "#002859",
+      ];
+      const ANIMATED_BG_ROWS = 32;
+      const ANIMATED_BG_COLS = 32;
+      const PLACEHOLDER_IMAGE =
+        "content/a5659b698521f91102592c4c3ce88c5cd1227ab773219b07f039e311ce582159i0";
+
+      /*
+       * COMPONENT – ANIMATED BACKGROUND
+       */
+
+      const AnimatedBackground = () => {
+        /* REFS */
+
+        const interval = window.useRef();
+
+        /* STATE */
+
+        const [_, setTime] = window.useState(Date.now());
+
+        /* HANDLER */
+
+        const getRandomColor = React.useCallback(() => {
+          const i = Math.floor(Math.random() * COLORS.length);
+          return COLORS[i];
+        }, []);
+
+        /* EFFECTS */
+
+        useEffect(() => {
+          interval.current = setInterval(() => {
+            setTime(Date.now());
+          }, 800);
+
+          return () => {
+            clearInterval(interval.current);
+          };
+        }, []);
+
+        /* RENDER */
+
+        return html`
+          <div className="bg-container">
+            ${Array.from(Array(ANIMATED_BG_ROWS * ANIMATED_BG_COLS).keys()).map(
+              (i) => {
+                return html`<div
+                  className="box"
+                  key=${i}
+                  style=${{ backgroundColor: getRandomColor() }}
+                />`;
+              }
+            )}
+          </div>
+        `;
+      };
+
+      /*
+       * COMPONENT – APPLICATION
+       */
+
+      const App = function () {
+        /* STATE */
+
+        const [appState, setAppState] = React.useState("intro");
+        const [musicOn, setMusicOn] = useState(true);
+
+        const [pixogetteHashlist, setPixogetteHashlist] = useState(null);
+        const [inscriptionId, setInscriptionId] = useState(null);
+        const [pixogetteId, setPixogetteId] = useState("0");
+        const [inscriptionImage, setInscriptionImage] = useState(null);
+        const [inscriptionMetadata, setInscriptionMetadata] = useState(null);
+
+        /* REFS */
+        const imageElement = useRef(null);
+
+        /* HOOKS */
+        const useKonami = (action) => {
+          const [input, setInput] = useState([]);
+
+          const onKeyUp = useCallback(
+            (e) => {
+              const newInput = input;
+              newInput.push(e.keyCode);
+              newInput.splice(
+                -KONAMI_CODE.length - 1,
+                input.length - KONAMI_CODE.length
+              );
+
+              setInput(newInput);
+
+              if (newInput.join("").includes(KONAMI_CODE.join(""))) {
+                action();
+              }
+            },
+            [input, setInput, KONAMI_CODE, action]
+          );
+
+          useEffect(() => {
+            document.addEventListener("keyup", onKeyUp);
+            return () => {
+              document.removeEventListener("keyup", onKeyUp);
+            };
+          }, [onKeyUp]);
+        };
+
+        /* UTILS */
+
+        const playMusic = () => {
+          const audioElement = document.getElementById("pixogette");
+          if (audioElement) {
+            audioElement.volume = 0.3;
+            audioElement.play();
+          }
+        };
+
+        const stopMusic = () => {
+          const audioElement = document.getElementById("pixogette");
+          if (audioElement) {
+            audioElement.pause();
+          }
+        };
+
+        const getImageData = useCallback(async (src) => {
+          const url =
+            src.includes("http://") || src.includes("https://")
+              ? getCorsProxyURL(src)
+              : src;
+          const e = await exifr.parse(url);
+          const data = JSON.parse(e.Description);
+          setInscriptionMetadata(data);
+          setInscriptionId("");
+          setPixogetteId("0");
+          playComment(data.Accessory, data.Special);
+        }, []);
+
+        const playAudio = useCallback((id, callback) => {
+          const audioElement = document.getElementById(id);
+          if (audioElement) {
+            audioElement.play();
+            if (callback) {
+              audioElement.addEventListener("ended", callback, {
+                once: !0,
+              });
+            }
+          }
+        }, []);
+
+        const playRandomComment = useCallback((comments) => {
+          const comment = comments[Math.floor(Math.random() * comments.length)];
+          playAudio(comment);
+        }, []);
+
+        const playComment = (accessory, special) => {
+          if (special) {
+            switch (special) {
+              case "Amanda":
+                playAudio("aman");
+                break;
+              case "Bebiwarudo":
+                playAudio("bebi");
+                break;
+              case "1312":
+                playAudio("kill");
+                break;
+              case "Matriarch":
+                playAudio("matr");
+                break;
+              case "Rich":
+                stopMusic();
+                playAudio("rich", () => {
+                  playMusic();
+                });
+                break;
+              case "Whitepaper":
+                playAudio("plan");
+                break;
+              default:
+                playRandomComment(["rar1", "rar2", "rar3"]);
+            }
+          } else {
+            switch (accessory) {
+              case "Rambo":
+                playAudio("dldo");
+                break;
+              default:
+                playRandomComment([
+                  "non1",
+                  "non2",
+                  "non3",
+                  "non4",
+                  "non5",
+                  "non6",
+                  "non7",
+                  "non8",
+                  "non9",
+                  "non0",
+                ]);
+            }
+          }
+        };
+
+        /* HANDLER */
+
+        const handleIntroClick = useCallback(() => {
+          setAppState("form");
+          playMusic();
+        }, []);
+
+        const handleKonami = useCallback(() => {
+          playAudio("ctcd");
+        }, []);
+
+        const handleToggleMusic = useCallback(() => {
+          if (musicOn) {
+            stopMusic();
+            setMusicOn(false);
+          } else {
+            playMusic();
+            setMusicOn(true);
+          }
+        }, [musicOn]);
+
+        const handleInscriptionIdChange = useCallback((e) => {
+          setInscriptionId(e.target.value);
+        }, []);
+
+        const handleGetInscriptionFromId = useCallback(
+          async (e) => {
+            e.preventDefault();
+            setInscriptionMetadata(null);
+            setPixogetteId("0");
+
+            if (
+              pixogetteHashlist &&
+              pixogetteHashlist.includes(inscriptionId)
+            ) {
+              const index = pixogetteHashlist.indexOf(inscriptionId);
+              setInscriptionImage(`/content/${inscriptionId}`);
+            } else {
+              const metadataRequest = await fetch(
+                `/r/metadata/${inscriptionId}`
+              );
+              const json = await metadataRequest.json();
+              const fromHexString = (hexString) =>
+                Uint8Array.from(
+                  hexString.match(/.{1,2}/g).map((byte) => parseInt(byte, 16))
+                );
+
+              if (json !== "f6") {
+                const m = decode(fromHexString(json));
+                if ("attributes" in m) {
+                  const flatMetadata = Object.values(m.attributes).reduce(
+                    (acc, a) => {
+                      acc[a.trait_type] = a.value;
+                      return acc;
+                    },
+                    {
+                      Name: m.name,
+                    }
+                  );
+                  setInscriptionMetadata(flatMetadata);
+                } else {
+                  setInscriptionMetadata(m);
+                }
+              } else {
+                console.log("no metadata found!");
+              }
+              setInscriptionImage(`/content/${inscriptionId}`);
+            }
+          },
+          [inscriptionId, pixogetteHashlist]
+        );
+
+        const handlePixogetteIdChange = useCallback((e) => {
+          setPixogetteId(e.target.value);
+        }, []);
+
+        const handleGetPixogetteFromId = useCallback(
+          (e) => {
+            if (e) e.preventDefault();
+            setInscriptionMetadata(null);
+            setInscriptionImage(`/content/${pixogetteId}`);
+          },
+          [pixogetteId]
+        );
+
+        const handleImageLoaded = useCallback(async () => {
+          if (inscriptionImage && imageElement.current) {
+            const el = document.getElementById("inscription-image");
+            const e = await exifr.parse(el.src);
+            const metadata = JSON.parse(e.Description);
+            console.log(metadata);
+            setInscriptionMetadata(metadata);
+            setInscriptionId("");
+            setPixogetteId("0");
+            playComment(metadata.Accessory, metadata.Special);
+          }
+        }, [inscriptionImage, inscriptionMetadata]);
+
+        /* EFFECTS */
+
+        useKonami(handleKonami);
+
+        useEffect(async () => {
+          const hashlistRequest = await fetch(
+            `/content/be92901cdb7e358a110c50f803e05186fa897ff02b1259ba46575f68f2bb773di0`
+          );
+          const hashlist = await hashlistRequest.json();
+          setPixogetteHashlist(hashlist);
+        }, []);
+
+        /* RENDER */
+
+        return html`
+          <div class="app">
+            <${AnimatedBackground} />
+            <div
+              className="ui"
+              style=${{
+                backgroundColor:
+                  appState === "intro"
+                    ? "rgba(256,256,256,0.75)"
+                    : "rgba(256,256,256,0)",
+              }}
+            >
+              ${appState === "intro" &&
+              html`
+                <div className="splash">
+                  <h1 className="color-changing">
+                    Welcome to the on-chain Pixogette Metadata Reader
+                  </h1>
+                  <button onClick=${handleIntroClick}>
+                    Click here to start!
+                  </button>
+                </div>
+              `}
+              ${appState === "form" &&
+              html`
+                <div className="form-container">
+                  <div className="row">
+                    <h1 className="color-changing">
+                      Pixogette Metadata Reader
+                    </h1>
+                  </div>
+
+                  <div className="row">
+                    <button onClick=${handleToggleMusic}>
+                      Music${" "}
+                      <span
+                        style=${{
+                          textDecoration: musicOn ? "underline" : "none",
+                        }}
+                      >
+                        On
+                      </span>
+                      /
+                      <span
+                        style=${{
+                          textDecoration: musicOn ? "none" : "underline",
+                        }}
+                      >
+                        Off
+                      </span>
+                    </button>
+                  </div>
+
+                  <div className="forms">
+                    <form onSubmit=${handleGetInscriptionFromId}>
+                      <input
+                        className="input"
+                        type="text"
+                        placeholder="Enter Id"
+                        value=${inscriptionId}
+                        onInput=${handleInscriptionIdChange}
+                      />
+                      <button
+                        disabled=${inscriptionId === "" ||
+                        inscriptionId == undefined}
+                      >
+                        Load
+                      </button>
+                    </form>
+
+                    <form onSubmit=${handleGetPixogetteFromId}>
+                      <select
+                        onChange=${handlePixogetteIdChange}
+                        value=${pixogetteId}
+                      >
+                        <option disabled value="0">Pick a #</option>
+                        ${pixogetteHashlist &&
+                        Object.values(pixogetteHashlist).map(
+                          (i, index) => html`
+                            <option key=${index + 1} value=${i}>
+                              Pixogette #${index + 1}
+                            </option>
+                          `
+                        )}
+                      </select>
+                      <button disabled=${pixogetteId === "0"}>Load</button>
+                    </form>
+                  </div>
+
+                  <div className="row">
+                    <img
+                      src=${inscriptionImage
+                        ? inscriptionImage
+                        : PLACEHOLDER_IMAGE}
+                      alt="Inscription Image"
+                      id="inscription-image"
+                      className="inscription-image"
+                      ref=${imageElement}
+                      onLoad=${() => {
+                        console.log(pixogetteId);
+                        if (pixogetteId && pixogetteId !== "0")
+                          handleImageLoaded();
+                      }}
+                    />
+                  </div>
+
+                  ${inscriptionMetadata
+                    ? html`
+                        <div>
+                          ${Object.keys(inscriptionMetadata).map((k) =>
+                            inscriptionMetadata[k] !== ""
+                              ? html`
+                                  <div
+                                    key=${k}
+                                    className=${k === "Special"
+                                      ? "trait-box color-changing"
+                                      : "trait-box"}
+                                  >
+                                    <p className="trait-name">${k}</p>
+                                    <p>${inscriptionMetadata[k]}</p>
+                                  </div>
+                                `
+                              : null
+                          )}
+                        </div>
+                      `
+                    : inscriptionImage &&
+                      html`
+                        <div>
+                          <div className="trait-box">
+                            <p>No Metadata found</p>
+                          </div>
+                        </div>
+                      `}
+                </div>
+              `}
+            </div>
+          </div>
+        `;
+      };
+
+      ReactDOM.render(html`<${App} />`, document.getElementById("root"));
+    </script>
+  </body>
+</html>

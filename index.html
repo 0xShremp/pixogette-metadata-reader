@@ -21,19 +21,24 @@
         line-height: 1.5;
       }
 
-      body,
-      #root {
-        height: 100%;
-        width: 100%;
+      html,
+      body {
+        width: 100vw;
+        height: 100vh;
+        overflow-y: scroll;
+        margin: 0;
+        padding: 0;
+        font-family: IBM CGA;
+        font-size: 10px;
+        -moz-osx-font-smoothing: unset;
+        -webkit-font-smoothing: none;
+        text-rendering: optimizeSpeed;
       }
 
-      .app {
-        height: 100%;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: Arial, serif;
+      #root {
+        width: 100vw;
+        height: 100vh;
+        z-index: 1;
       }
 
       * {
@@ -42,84 +47,29 @@
         line-height: 1.5;
       }
 
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: IBM CGA;
-        font-size: 10px;
-        -moz-osx-font-smoothing: unset;
-        -webkit-font-smoothing: none;
-        text-rendering: optimizeSpeed;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        overflow: auto;
-      }
-
-      h1 {
-        font-size: 14px;
-        width: 100%;
-        margin: 0;
-      }
-
-      #app {
-        width: 100vw;
-        height: 100vh;
-      }
-
-      .bg-container {
-        position: fixed;
-        display: grid;
-        grid-template-columns: repeat(16, calc(100vh / 16));
-        grid-template-rows: repeat(16, calc(100vh / 16));
-        height: auto;
-        margin: 0 auto;
-        z-index: 1;
-        top: 0;
-        left: 50%;
-        transform: translate(-50%);
-      }
-
-      @media screen and (min-width: 640px) {
-        .bg-container {
-          grid-template-columns: repeat(24, calc(100vh / 24));
-          grid-template-rows: repeat(24, calc(100vh / 24));
-        }
-      }
-
-      @media (min-width: 1024px) {
-        .bg-container {
-          grid-template-columns: repeat(32, calc(100vw / 32));
-          grid-template-rows: repeat(32, calc(100vw / 32));
-        }
-      }
-
-      .box {
-        width: 100%;
-        height: 100%;
-      }
-
-      .box:first-child {
-        grid-row: 1 / 1;
-        grid-column: 1 / 1;
-      }
-
       .ui {
-        width: 100%;
-        z-index: 1;
-        height: 100%;
+        width: 100vw;
+        min-height: 100%;
+        padding: 1rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 1rem;
+      }
+
+      .ui.form {
+        justify-content: flex-start;
+      }
+
+      h1 {
+        font-size: 12px;
+        width: 100%;
+        margin: 0;
       }
 
       .splash {
         width: 100%;
-        max-width: 576px;
+        max-width: 400px;
         text-align: center;
         margin: 0 auto;
         padding: 8px;
@@ -130,13 +80,21 @@
 
       .form-container {
         width: 100%;
-        height: 100vh;
-        max-width: 576px;
+        max-width: 400px;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
         align-items: center;
-        overflow-y: scroll;
+      }
+
+      @media screen and (min-width: 577px) {
+        .form-container {
+          max-width: 640px;
+        }
+
+        h1 {
+          font-size: 16px;
+        }
       }
 
       .card {
@@ -159,7 +117,7 @@
       }
 
       .spaced > *:not(:last-child) {
-        margin-right: 8px;
+        margin-right: 4px;
       }
 
       .forms {
@@ -193,7 +151,6 @@
         flex-wrap: wrap;
         max-width: 100%;
         max-height: 200px;
-        overflow-y: auto;
         margin-bottom: 10px;
       }
 
@@ -275,7 +232,7 @@
         height: 32px;
         border: none;
         background-color: #f0f0f0;
-        font-size: 10px;
+        font-size: 9px;
         padding: 8px;
         color: #757575;
         transition: background-color 0.3s;
@@ -305,7 +262,8 @@
 
       select:hover,
       select:focus {
-        outline: 0;
+        outline: none;
+        box-shadow: 0 0 0 1pt #94216a;
         border: none;
         background-color: #e7e7e7;
       }
@@ -518,7 +476,7 @@
       });
     </script>
   </head>
-  <body style="height: 100vh; width: 100vw; margin: 0px; overflow: hidden">
+  <body>
     <div id="root"></div>
     <audio id="aman" preload="auto">
       <source
@@ -641,9 +599,23 @@
       />
     </audio>
     <script type="module">
-      import "/content/faa7b9b0b7884360f6c2b34693855a0d60df5f344727c72e3691a80f84ec6a81i0";
+      import htm from "/content/65035174d0dd81079dadec7e33808c8db77e0683ae5fca330ca992e3f631517fi0";
+      import React from "/content/7f403153b6484f7d24f50a51e1cdf8187219a3baf103ef0df5ea2437fb9de874i0";
+      import ReactDOM from "/content/89295aaf617708128b95d22e7099ce32108d4b918386e6f90994e7979d22ba72i0";
+
       import { decompressSync } from "/content/f815bd5c566c6e46de5cdb6ccb3a7043c63deeba61f4234baea84b602b0d4440i0";
       import { decode } from "/content/077fbf9e2d8c405e5f276220ed83c029eb86ecc1bd22a60a63a43eb925f28636i0";
+
+      window.ReactDOM = ReactDOM;
+      window.React = React;
+      window.Suspense = React.Suspense;
+      window.useRef = React.useRef;
+      window.useMemo = React.useMemo;
+      window.useState = React.useState;
+      window.useEffect = React.useEffect;
+      window.useCallback = React.useCallback;
+      window.useImperativeHandle = React.useImperativeHandle;
+      window.html = htm.bind(React.createElement);
 
       const exifrResponse = await fetch(
         `/content/2877a6fe295d15d4acf65d714dc37fa6920439aa87d44854bda8f88deea7ab22i0`
@@ -1005,146 +977,138 @@
         /* RENDER */
 
         return html`
-          <div class="app">
-            <div
-              className="ui"
-              style=${{
-                backgroundColor:
-                  appState === "intro"
-                    ? "rgba(256,256,256,0.75)"
-                    : "rgba(256,256,256,0)",
-              }}
-            >
-              ${appState === "intro" &&
-              html`
-                <div className="splash">
-                  <h1
-                    className="color-changing"
-                    style=${{ marginBottom: "8px" }}
-                  >
-                    Welcome to the on-chain Pixogette Metadata Reader
-                  </h1>
-                  <button onClick=${handleIntroClick}>
-                    Click here to start!
-                  </button>
-                </div>
-              `}
-              ${appState === "form" &&
-              html`
-                <div className="form-container">
-                  <div className="card">
-                    <div className="flex-horizontal spaced">
-                      <h1 className="color-changing">
-                        Pixogette Metadata Reader
-                      </h1>
-                      <button onClick=${handleToggleMusic}>
-                        ${musicOn ? ICONS.MusicOff() : ICONS.MusicOn()}
+          <div className=${appState === "intro" ? "ui" : "ui form"}>
+            ${appState === "intro" &&
+            html`
+              <div className="splash">
+                <h1 className="color-changing" style=${{ marginBottom: "8px" }}>
+                  Welcome to the on-chain Pixogette Metadata Reader
+                </h1>
+                <button onClick=${handleIntroClick}>
+                  Click here to start!
+                </button>
+              </div>
+            `}
+            ${appState === "form" &&
+            html`
+              <div className="form-container">
+                <div className="card">
+                  <div className="flex-horizontal spaced">
+                    <h1 className="color-changing">
+                      Pixogette Metadata Reader
+                    </h1>
+                    <button onClick=${handleToggleMusic}>
+                      ${musicOn ? ICONS.MusicOff() : ICONS.MusicOn()}
+                    </button>
+                    <label className="select-hidden">
+                      <select onChange=${handlePickSong}>
+                        ${SONGS.map(
+                          (s) => html`<option key=${s}>${s}</option>`
+                        )}
+                      </select>
+                      <div className="icon">${ICONS.Song()}</div>
+                    </label>
+                  </div>
+
+                  <div className="forms">
+                    <form
+                      onSubmit=${handleGetInscriptionFromId}
+                      className="flex-horizontal"
+                    >
+                      <input
+                        className="input"
+                        type="text"
+                        placeholder="Enter Id"
+                        value=${inscriptionId}
+                        onInput=${handleInscriptionIdChange}
+                      />
+                      <button
+                        disabled=${inscriptionId === "" ||
+                        inscriptionId == undefined}
+                        style=${{ marginLeft: "1px" }}
+                      >
+                        ${ICONS.Arrow()}
                       </button>
-                      <label className="select-hidden">
-                        <select onChange=${handlePickSong}>
-                          ${SONGS.map(
-                            (s) => html`<option key=${s}>${s}</option>`
-                          )}
-                        </select>
-                        <div className="icon">${ICONS.Song()}</div>
-                      </label>
-                    </div>
+                    </form>
 
-                    <div className="forms">
-                      <form
-                        onSubmit=${handleGetInscriptionFromId}
-                        className="flex-horizontal"
+                    <form
+                      className="flex-horizontal"
+                      onSubmit=${handleGetPixogetteFromId}
+                    >
+                      <select
+                        onChange=${handlePixogetteIdChange}
+                        value=${pixogetteId}
                       >
-                        <input
-                          className="input"
-                          type="text"
-                          placeholder="Enter Id"
-                          value=${inscriptionId}
-                          onInput=${handleInscriptionIdChange}
-                        />
-                        <button
-                          disabled=${inscriptionId === "" ||
-                          inscriptionId == undefined}
-                        >
-                          ${ICONS.Arrow()}
-                        </button>
-                      </form>
-
-                      <form
-                        className="flex-horizontal"
-                        onSubmit=${handleGetPixogetteFromId}
+                        <option disabled value="0">Pick a #</option>
+                        ${pixogetteHashlist &&
+                        Object.values(pixogetteHashlist).map(
+                          (i, index) => html`
+                            <option key=${index + 1} value=${i}>
+                              Pixogette #${index + 1}
+                            </option>
+                          `
+                        )}
+                      </select>
+                      <button
+                        disabled=${pixogetteId === "0"}
+                        style=${{ marginLeft: "2px" }}
                       >
-                        <select
-                          onChange=${handlePixogetteIdChange}
-                          value=${pixogetteId}
-                        >
-                          <option disabled value="0">Pick a #</option>
-                          ${pixogetteHashlist &&
-                          Object.values(pixogetteHashlist).map(
-                            (i, index) => html`
-                              <option key=${index + 1} value=${i}>
-                                Pixogette #${index + 1}
-                              </option>
-                            `
-                          )}
-                        </select>
-                        <button disabled=${pixogetteId === "0"}>
-                          ${ICONS.Arrow()}
-                        </button>
-                      </form>
-                    </div>
-                  </div>
-
-                  <div className="card">
-                    <img
-                      src=${inscriptionImage
-                        ? inscriptionImage
-                        : PLACEHOLDER_IMAGE}
-                      alt="Inscription Image"
-                      id="inscription-image"
-                      className="inscription-image"
-                      ref=${imageElement}
-                      onLoad=${() => {
-                        console.log(pixogetteId);
-                        if (pixogetteId && pixogetteId !== "0")
-                          handleImageLoaded();
-                      }}
-                    />
-                  </div>
-
-                  <div ref=${metadataElement}>
-                    ${inscriptionMetadata
-                      ? html`
-                          <div>
-                            ${Object.keys(inscriptionMetadata).map((k) =>
-                              inscriptionMetadata[k] !== ""
-                                ? html`
-                                    <div
-                                      key=${k}
-                                      className=${k === "Special"
-                                        ? "trait-box color-changing"
-                                        : "trait-box"}
-                                    >
-                                      <p className="trait-name">${k}</p>
-                                      <p>${inscriptionMetadata[k]}</p>
-                                    </div>
-                                  `
-                                : null
-                            )}
-                          </div>
-                        `
-                      : inscriptionImage &&
-                        html`
-                          <div>
-                            <div className="trait-box">
-                              <p>No Metadata found</p>
-                            </div>
-                          </div>
-                        `}
+                        ${ICONS.Arrow()}
+                      </button>
+                    </form>
                   </div>
                 </div>
-              `}
-            </div>
+
+                <div className="card">
+                  <img
+                    src=${inscriptionImage
+                      ? inscriptionImage
+                      : PLACEHOLDER_IMAGE}
+                    alt="Inscription Image"
+                    id="inscription-image"
+                    className="inscription-image"
+                    ref=${imageElement}
+                    onLoad=${() => {
+                      console.log(pixogetteId);
+                      if (pixogetteId && pixogetteId !== "0")
+                        handleImageLoaded();
+                    }}
+                  />
+                </div>
+
+                <div>
+                  ${inscriptionMetadata
+                    ? html`
+                        <div>
+                          ${Object.keys(inscriptionMetadata).map((k) =>
+                            inscriptionMetadata[k] !== ""
+                              ? html`
+                                  <div
+                                    key=${k}
+                                    className=${k === "Special"
+                                      ? "trait-box color-changing"
+                                      : "trait-box"}
+                                  >
+                                    <p className="trait-name">${k}</p>
+                                    <p>${inscriptionMetadata[k]}</p>
+                                  </div>
+                                `
+                              : null
+                          )}
+                        </div>
+                      `
+                    : inscriptionImage &&
+                      html`
+                        <div>
+                          <div className="trait-box">
+                            <p>No Metadata found</p>
+                          </div>
+                        </div>
+                      `}
+                </div>
+                <div ref=${metadataElement} />
+              </div>
+            `}
           </div>
         `;
       };

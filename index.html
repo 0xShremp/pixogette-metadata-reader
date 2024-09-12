@@ -30,7 +30,6 @@
       .app {
         height: 100%;
         width: 100%;
-        background: #ffffff;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -60,7 +59,9 @@
       }
 
       h1 {
-        font-size: 19px;
+        font-size: 14px;
+        width: 100%;
+        margin: 0;
       }
 
       #app {
@@ -107,30 +108,30 @@
 
       .ui {
         width: 100%;
-        background-color: #ffffffd9;
-        transition: background-color 0.5s ease-in-out;
         z-index: 1;
         height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        padding: 1rem;
       }
 
       .splash {
         width: 100%;
-        max-width: 512px;
+        max-width: 576px;
         text-align: center;
         margin: 0 auto;
         padding: 8px;
         background-color: #fff;
+        display: flex;
+        flex-direction: column;
       }
 
       .form-container {
-        padding: 2rem;
         width: 100%;
         height: 100vh;
-        max-width: 512px;
+        max-width: 576px;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
@@ -138,11 +139,27 @@
         overflow-y: scroll;
       }
 
-      .row {
+      .card {
         background-color: #fff;
         width: 100%;
-        padding: 8px;
+        padding: 12px;
         margin-bottom: 8px;
+        gap: 8px;
+      }
+
+      .card > *:not(:last-child) {
+        margin-bottom: 8px;
+      }
+
+      .flex-horizontal {
+        display: flex;
+        flex-direction: row;
+        justify-items: flex-start;
+        align-items: center;
+      }
+
+      .spaced > *:not(:last-child) {
+        margin-right: 8px;
       }
 
       .forms {
@@ -151,13 +168,12 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 8px;
-        margin-bottom: 8px;
       }
 
       .trait-box {
         background-color: #fff;
         margin: 0.25rem;
-        padding: 0.5rem;
+        padding: 0.25rem;
         display: inline-block;
       }
 
@@ -167,7 +183,7 @@
 
       .trait-name {
         font-weight: 700;
-        font-size: 10px;
+        font-size: 8px;
         margin-bottom: 0.25rem;
         opacity: 0.75;
       }
@@ -199,20 +215,14 @@
         max-width: 100%;
       }
 
-      form {
-        padding: 8px;
-        height: 100%;
-        width: 100%;
-        background-color: #fff;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-
       button,
       input,
       label {
         font-size: inherit;
+      }
+
+      svg {
+        display: block;
       }
 
       button {
@@ -220,46 +230,77 @@
         background-color: #fff;
         border: none;
         cursor: pointer;
-        padding: 8px 16px;
-        font-size: 16px;
+        padding: 4px;
+        font-size: 10px;
         transition: background-color 0.3s;
         line-height: 1.25;
+        min-height: 32px;
+        min-width: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      button:disabled {
+        opacity: 0.25;
       }
 
       button:hover,
-      input[type="button"]:hover,
-      input[type="file"]:hover {
+      input[type="button"]:hover {
         background-color: #f0f0f0;
       }
 
       input[type="button"],
-      input[type="text"],
-      input[type="file"] {
-        height: 40px;
+      input[type="text"] {
+        height: 32px;
         border: none;
         font-family: inherit;
         background-color: #f0f0f0;
         padding: 8px;
-        font-size: 14px;
+        font-size: 10px;
         transition: background-color 0.3s;
         width: 100%;
       }
 
       input[type="text"]:hover,
       input[type="text"]:focus {
-        outline: 0;
+        outline: none;
+        box-shadow: 0 0 0 1pt #94216a;
         border: none;
         background-color: #e7e7e7;
       }
 
       select {
-        height: 40px;
+        width: 100%;
+        height: 32px;
         border: none;
         background-color: #f0f0f0;
-        font-size: 14px;
+        font-size: 10px;
         padding: 8px;
         color: #757575;
         transition: background-color 0.3s;
+      }
+
+      .select-hidden {
+        position: relative;
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+      }
+
+      .select-hidden:hover .icon {
+        background-color: #f0f0f0;
+      }
+
+      .select-hidden .icon {
+        position: absolute;
+        top: 0;
+        height: 0;
+        width: 32px;
+        height: 32px;
+        padding: 8px;
+        background-color: #fff;
+        pointer-events: none;
       }
 
       select:hover,
@@ -267,13 +308,6 @@
         outline: 0;
         border: none;
         background-color: #e7e7e7;
-      }
-
-      @media only screen and (max-width: 600px) {
-        input,
-        select {
-          font-size: 12px;
-        }
       }
 
       @keyframes colorChange {
@@ -362,6 +396,127 @@
         animation: colorChange 3.2s steps(16) infinite;
       }
     </style>
+    <script src="/content/4935b900a0c5e3e1d898b52c6e39bcd127a1fb301afc5a3d18ca07e6a7fc5069i0"></script>
+
+    <script type="x-shader/x-fragment" id="Image">
+      precision highp float;
+
+      uniform vec2  iResolution;
+      uniform float iTime;
+
+      // -- Paste your Shadertoy code here:
+
+      #define time iTime * 1.0
+      #define scale 8.0
+      #define resolution 1.0 / 2.0
+      #define background 0.25
+      #define PI 3.14159265359
+
+      /*
+        Brightness function adapted from: https://github.com/hughsk/glsl-luma
+        Dithering functions adapted from: https://github.com/hughsk/glsl-dither
+        Edit: Eh, I just realized that the 8x8 R texture is made for this.
+      */
+      float luma(in vec4 color) {
+          return dot(color.rgb, vec3(0.299, 0.587, 0.114));
+      }
+
+      float dither4x4(in vec2 position, in float brightness) {
+          int x = int(mod(position.x, 4.0));
+        int y = int(mod(position.y, 4.0));
+        int index = x + y * 4;
+        float limit = 0.0;
+
+        if (x < 8) {
+          if (index == 0) limit = 0.0625;
+          if (index == 1) limit = 0.5625;
+            if (index == 2) limit = 0.1875;
+            if (index == 3) limit = 0.6875;
+            if (index == 4) limit = 0.8125;
+            if (index == 5) limit = 0.3125;
+            if (index == 6) limit = 0.9375;
+            if (index == 7) limit = 0.4375;
+            if (index == 8) limit = 0.25;
+            if (index == 9) limit = 0.75;
+            if (index == 10) limit = 0.125;
+            if (index == 11) limit = 0.625;
+            if (index == 12) limit = 1.0;
+            if (index == 13) limit = 0.5;
+            if (index == 14) limit = 0.875;
+            if (index == 15) limit = 0.375;
+              limit *= 0.75;
+        }
+
+        return brightness < limit ? 0.0 : 1.0;
+      }
+
+      vec4 dither4x4(in vec2 position, in vec4 color) {
+        return vec4(color.rgb * dither4x4(position, luma(color)), 1.0);
+      }
+
+      /*
+        Plasma functions adapted from: http://www.bidouille.org/prog/plasma
+        At first I tried to make up my own, but as I didn't like the outcome I decided to use the ones in above link.
+        It's surprisingly difficult to come up with good looking color combinations.
+      */
+      float v1(in vec2 uv)
+      {
+          return sin(uv.x * scale + time);
+      }
+
+      float v2(in vec2 uv)
+      {
+          return sin(scale * (uv.x * sin(time / 2.0) + uv.y * cos(time / 3.0)) + time);
+      }
+
+      float v3(in vec2 uv)
+      {
+          float cx = uv.x + 0.5 * sin(time / 5.0);
+          float cy = uv.y + 0.5 * cos(time / 3.0);
+          return sin(sqrt(128.0 * (cx * cx + cy * cy) + 1.0) + time);
+      }
+
+      float v(in vec2 uv)
+      {
+          return v1(uv) + v2(uv) + v3(uv);
+      }
+
+      void mainImage(out vec4 c, in vec2 f)
+      {
+          // Center & scale the uv coordinates
+        vec2 uv = (f.xy / iResolution.xy) - vec2(0.5);
+          uv.x *= iResolution.x / iResolution.y;
+          c = vec4(0.0);
+
+          // Plasma
+          c.r += sin(v(uv) * PI * 0.16);
+          c.g += sin(v(uv) * PI * 0.33);
+          c.b += sin(v(uv) * PI * 0.66);
+
+          // Dither + mix with background color
+          c = max(dither4x4(f * resolution, c), background);
+      }
+
+      // -- End of Shadertoy code
+
+
+      void main() {
+        mainImage(gl_FragColor, gl_FragCoord.xy);
+      }
+    </script>
+    <script>
+      shaderWebBackground.shade({
+        shaders: {
+          Image: {
+            uniforms: {
+              iResolution: (gl, loc, ctx) =>
+                gl.uniform2f(loc, ctx.width, ctx.height),
+              iTime: (gl, loc) => gl.uniform1f(loc, performance.now() / 1000),
+            },
+          },
+        },
+      });
+    </script>
   </head>
   <body style="height: 100vh; width: 100vw; margin: 0px; overflow: hidden">
     <div id="root"></div>
@@ -475,9 +630,14 @@
         src="/content/b99397826093826e7df6ceed04de288f75da994e807805408586ca15fb2f4730i0"
       />
     </audio>
-    <audio id="pixogette" loop preload="auto">
+    <audio id="song1" loop preload="auto">
       <source
         src="/content/917604614ee5acdc9c1ee51f1957c9aa0e101c1b168836f690544a519644fecfi0"
+      />
+    </audio>
+    <audio id="song2" loop preload="auto">
+      <source
+        src="/content/b99397826093826e7df6ceed04de288f75da994e807805408586ca15fb2f4730i0"
       />
     </audio>
     <script type="module">
@@ -500,76 +660,71 @@
 
       const LOADING = "Loading";
       const KONAMI_CODE = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
-      const COLORS = [
-        "#16171a",
-        "#7f0622",
-        "#d62411",
-        "#ff8426",
-        "#ffd100",
-        "#fafdff",
-        "#ff80a4",
-        "#ff2674",
-        "#94216a",
-        "#430067",
-        "#234975",
-        "#68aed4",
-        "#bfff3c",
-        "#10d275",
-        "#007899",
-        "#002859",
-      ];
-      const ANIMATED_BG_ROWS = 32;
-      const ANIMATED_BG_COLS = 32;
       const PLACEHOLDER_IMAGE =
         "content/a5659b698521f91102592c4c3ce88c5cd1227ab773219b07f039e311ce582159i0";
-
-      /*
-       * COMPONENT – ANIMATED BACKGROUND
-       */
-
-      const AnimatedBackground = () => {
-        /* REFS */
-
-        const interval = window.useRef();
-
-        /* STATE */
-
-        const [_, setTime] = window.useState(Date.now());
-
-        /* HANDLER */
-
-        const getRandomColor = React.useCallback(() => {
-          const i = Math.floor(Math.random() * COLORS.length);
-          return COLORS[i];
-        }, []);
-
-        /* EFFECTS */
-
-        useEffect(() => {
-          interval.current = setInterval(() => {
-            setTime(Date.now());
-          }, 800);
-
-          return () => {
-            clearInterval(interval.current);
-          };
-        }, []);
-
-        /* RENDER */
-
-        return html`
-          <div className="bg-container">
-            ${Array.from(Array(ANIMATED_BG_ROWS * ANIMATED_BG_COLS).keys()).map(
-              (i) => {
-                return html`<div
-                  className="box"
-                  key=${i}
-                  style=${{ backgroundColor: getRandomColor() }}
-                />`;
-              }
-            )}
-          </div>
-        `;
+      const SONGS = ["song1", "song2"];
+      const ICONS = {
+        MusicOff: () => html`<svg
+          width="16"
+          height="16"
+          viewBox="0 0 48 48"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M6 6H10V10H6V6Z" fill="black" />
+          <path d="M14 14H10V10H14V14Z" fill="black" />
+          <path d="M18 18H14V14H18V18Z" fill="black" />
+          <path
+            d="M30 10V6H22V18H18V22H22V30H14V34H10V38H14V42H22V38H26V30H30V34H34V38H38V42H42V38H38V34H34V30H30V26H26V10H30Z"
+            fill="black"
+          />
+          <path d="M30 10H38V14H30V10Z" fill="black" />
+        </svg> `,
+        MusicOn: () => html`<svg
+          width="16"
+          height="16"
+          viewBox="0 0 48 48"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M30 6V10H26V38H22V42H14V38H10V34H14V30H22V6H30Z"
+            fill="black"
+          />
+          <path d="M30 10H38V14H30V10Z" fill="black" />
+        </svg> `,
+        Song: () => html`<svg
+          width="16"
+          height="16"
+          viewBox="0 0 48 48"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M16 8H32V12H16V8Z" fill="black" />
+          <path d="M12 16V12H16V16H12Z" fill="black" />
+          <path
+            d="M12 16H8V32H12V36H16V40H32V36H36V32H40V16H36V12H32V16H36V32H32V36H16V32H12V16Z"
+            fill="black"
+          />
+          <path d="M20 20V28H28V20H20Z" fill="black" />
+        </svg> `,
+        Arrow: () => html`<svg
+          width="24"
+          height="24"
+          viewBox="0 0 48 48"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M20 6H24V10H28V14H24V18H12V30H24V34H28V38H24V42H20V34H8V14H20V6Z"
+            fill="black"
+          />
+          <path d="M32 30H28V34H32V30Z" fill="black" />
+          <path d="M36 26V30H32V26H36Z" fill="black" />
+          <path d="M36 22H40V26H36V22Z" fill="black" />
+          <path d="M32 18H36V22H32V18Z" fill="black" />
+          <path d="M32 18V14H28V18H32Z" fill="black" />
+        </svg>`,
       };
 
       /*
@@ -580,7 +735,9 @@
         /* STATE */
 
         const [appState, setAppState] = React.useState("intro");
+
         const [musicOn, setMusicOn] = useState(true);
+        const [song, setSong] = useState(SONGS[0]);
 
         const [pixogetteHashlist, setPixogetteHashlist] = useState(null);
         const [inscriptionId, setInscriptionId] = useState(null);
@@ -590,6 +747,7 @@
 
         /* REFS */
         const imageElement = useRef(null);
+        const metadataElement = useRef(null);
 
         /* HOOKS */
         const useKonami = (action) => {
@@ -623,20 +781,20 @@
 
         /* UTILS */
 
-        const playMusic = () => {
-          const audioElement = document.getElementById("pixogette");
+        const playMusic = React.useCallback((s) => {
+          const audioElement = document.getElementById(s);
           if (audioElement) {
             audioElement.volume = 0.3;
             audioElement.play();
           }
-        };
+        }, []);
 
-        const stopMusic = () => {
-          const audioElement = document.getElementById("pixogette");
+        const stopMusic = React.useCallback((s) => {
+          const audioElement = document.getElementById(s);
           if (audioElement) {
             audioElement.pause();
           }
-        };
+        }, []);
 
         const getImageData = useCallback(async (src) => {
           const url =
@@ -668,60 +826,65 @@
           playAudio(comment);
         }, []);
 
-        const playComment = (accessory, special) => {
-          if (special) {
-            switch (special) {
-              case "Amanda":
-                playAudio("aman");
-                break;
-              case "Bebiwarudo":
-                playAudio("bebi");
-                break;
-              case "1312":
-                playAudio("kill");
-                break;
-              case "Matriarch":
-                playAudio("matr");
-                break;
-              case "Rich":
-                stopMusic();
-                playAudio("rich", () => {
-                  playMusic();
-                });
-                break;
-              case "Whitepaper":
-                playAudio("plan");
-                break;
-              default:
-                playRandomComment(["rar1", "rar2", "rar3"]);
+        const playComment = React.useCallback(
+          (accessory, special) => {
+            if (special) {
+              switch (special) {
+                case "Amanda":
+                  playAudio("aman");
+                  break;
+                case "Bebiwarudo":
+                  playAudio("bebi");
+                  break;
+                case "1312":
+                  playAudio("kill");
+                  break;
+                case "Matriarch":
+                  playAudio("matr");
+                  break;
+                case "Rich":
+                  stopMusic(song);
+                  playAudio("rich", () => {
+                    playMusic(song);
+                  });
+                  break;
+                case "Whitepaper":
+                  playAudio("plan");
+                  break;
+                default:
+                  playRandomComment(["rar1", "rar2", "rar3"]);
+              }
+            } else {
+              switch (accessory) {
+                case "Rambo":
+                  playAudio("dldo");
+                  break;
+                default:
+                  playRandomComment([
+                    "non1",
+                    "non2",
+                    "non3",
+                    "non4",
+                    "non5",
+                    "non6",
+                    "non7",
+                    "non8",
+                    "non9",
+                    "non0",
+                  ]);
+              }
             }
-          } else {
-            switch (accessory) {
-              case "Rambo":
-                playAudio("dldo");
-                break;
-              default:
-                playRandomComment([
-                  "non1",
-                  "non2",
-                  "non3",
-                  "non4",
-                  "non5",
-                  "non6",
-                  "non7",
-                  "non8",
-                  "non9",
-                  "non0",
-                ]);
-            }
-          }
-        };
+          },
+          [song]
+        );
+
+        const scrollToMetadata = () => metadataElement.current.scrollIntoView();
 
         /* HANDLER */
 
         const handleIntroClick = useCallback(() => {
           setAppState("form");
-          playMusic();
+          playMusic(song);
         }, []);
 
         const handleKonami = useCallback(() => {
@@ -730,13 +893,23 @@
 
         const handleToggleMusic = useCallback(() => {
           if (musicOn) {
-            stopMusic();
+            stopMusic(song);
             setMusicOn(false);
           } else {
-            playMusic();
+            playMusic(song);
             setMusicOn(true);
           }
-        }, [musicOn]);
+        }, [musicOn, song]);
+
+        const handlePickSong = React.useCallback(
+          (e) => {
+            const newSong = e.target.value;
+            stopMusic(song);
+            setSong(newSong);
+            playMusic(newSong);
+          },
+          [song]
+        );
 
         const handleInscriptionIdChange = useCallback((e) => {
           setInscriptionId(e.target.value);
@@ -784,6 +957,7 @@
                 console.log("no metadata found!");
               }
               setInscriptionImage(`/content/${inscriptionId}`);
+              scrollToMetadata();
             }
           },
           [inscriptionId, pixogetteHashlist]
@@ -808,6 +982,7 @@
             const e = await exifr.parse(el.src);
             const metadata = JSON.parse(e.Description);
             console.log(metadata);
+            scrollToMetadata();
             setInscriptionMetadata(metadata);
             setInscriptionId("");
             setPixogetteId("0");
@@ -831,7 +1006,6 @@
 
         return html`
           <div class="app">
-            <${AnimatedBackground} />
             <div
               className="ui"
               style=${{
@@ -844,7 +1018,10 @@
               ${appState === "intro" &&
               html`
                 <div className="splash">
-                  <h1 className="color-changing">
+                  <h1
+                    className="color-changing"
+                    style=${{ marginBottom: "8px" }}
+                  >
                     Welcome to the on-chain Pixogette Metadata Reader
                   </h1>
                   <button onClick=${handleIntroClick}>
@@ -855,70 +1032,70 @@
               ${appState === "form" &&
               html`
                 <div className="form-container">
-                  <div className="row">
-                    <h1 className="color-changing">
-                      Pixogette Metadata Reader
-                    </h1>
-                  </div>
-
-                  <div className="row">
-                    <button onClick=${handleToggleMusic}>
-                      Music${" "}
-                      <span
-                        style=${{
-                          textDecoration: musicOn ? "underline" : "none",
-                        }}
-                      >
-                        On
-                      </span>
-                      /
-                      <span
-                        style=${{
-                          textDecoration: musicOn ? "none" : "underline",
-                        }}
-                      >
-                        Off
-                      </span>
-                    </button>
-                  </div>
-
-                  <div className="forms">
-                    <form onSubmit=${handleGetInscriptionFromId}>
-                      <input
-                        className="input"
-                        type="text"
-                        placeholder="Enter Id"
-                        value=${inscriptionId}
-                        onInput=${handleInscriptionIdChange}
-                      />
-                      <button
-                        disabled=${inscriptionId === "" ||
-                        inscriptionId == undefined}
-                      >
-                        Load
+                  <div className="card">
+                    <div className="flex-horizontal spaced">
+                      <h1 className="color-changing">
+                        Pixogette Metadata Reader
+                      </h1>
+                      <button onClick=${handleToggleMusic}>
+                        ${musicOn ? ICONS.MusicOff() : ICONS.MusicOn()}
                       </button>
-                    </form>
+                      <label className="select-hidden">
+                        <select onChange=${handlePickSong}>
+                          ${SONGS.map(
+                            (s) => html`<option key=${s}>${s}</option>`
+                          )}
+                        </select>
+                        <div className="icon">${ICONS.Song()}</div>
+                      </label>
+                    </div>
 
-                    <form onSubmit=${handleGetPixogetteFromId}>
-                      <select
-                        onChange=${handlePixogetteIdChange}
-                        value=${pixogetteId}
+                    <div className="forms">
+                      <form
+                        onSubmit=${handleGetInscriptionFromId}
+                        className="flex-horizontal"
                       >
-                        <option disabled value="0">Pick a #</option>
-                        ${pixogetteHashlist &&
-                        Object.values(pixogetteHashlist).map(
-                          (i, index) => html`
-                            <option key=${index + 1} value=${i}>
-                              Pixogette #${index + 1}
-                            </option>
-                          `
-                        )}
-                      </select>
-                      <button disabled=${pixogetteId === "0"}>Load</button>
-                    </form>
+                        <input
+                          className="input"
+                          type="text"
+                          placeholder="Enter Id"
+                          value=${inscriptionId}
+                          onInput=${handleInscriptionIdChange}
+                        />
+                        <button
+                          disabled=${inscriptionId === "" ||
+                          inscriptionId == undefined}
+                        >
+                          ${ICONS.Arrow()}
+                        </button>
+                      </form>
+
+                      <form
+                        className="flex-horizontal"
+                        onSubmit=${handleGetPixogetteFromId}
+                      >
+                        <select
+                          onChange=${handlePixogetteIdChange}
+                          value=${pixogetteId}
+                        >
+                          <option disabled value="0">Pick a #</option>
+                          ${pixogetteHashlist &&
+                          Object.values(pixogetteHashlist).map(
+                            (i, index) => html`
+                              <option key=${index + 1} value=${i}>
+                                Pixogette #${index + 1}
+                              </option>
+                            `
+                          )}
+                        </select>
+                        <button disabled=${pixogetteId === "0"}>
+                          ${ICONS.Arrow()}
+                        </button>
+                      </form>
+                    </div>
                   </div>
 
-                  <div className="row">
+                  <div className="card">
                     <img
                       src=${inscriptionImage
                         ? inscriptionImage
@@ -935,34 +1112,36 @@
                     />
                   </div>
 
-                  ${inscriptionMetadata
-                    ? html`
-                        <div>
-                          ${Object.keys(inscriptionMetadata).map((k) =>
-                            inscriptionMetadata[k] !== ""
-                              ? html`
-                                  <div
-                                    key=${k}
-                                    className=${k === "Special"
-                                      ? "trait-box color-changing"
-                                      : "trait-box"}
-                                  >
-                                    <p className="trait-name">${k}</p>
-                                    <p>${inscriptionMetadata[k]}</p>
-                                  </div>
-                                `
-                              : null
-                          )}
-                        </div>
-                      `
-                    : inscriptionImage &&
-                      html`
-                        <div>
-                          <div className="trait-box">
-                            <p>No Metadata found</p>
+                  <div ref=${metadataElement}>
+                    ${inscriptionMetadata
+                      ? html`
+                          <div>
+                            ${Object.keys(inscriptionMetadata).map((k) =>
+                              inscriptionMetadata[k] !== ""
+                                ? html`
+                                    <div
+                                      key=${k}
+                                      className=${k === "Special"
+                                        ? "trait-box color-changing"
+                                        : "trait-box"}
+                                    >
+                                      <p className="trait-name">${k}</p>
+                                      <p>${inscriptionMetadata[k]}</p>
+                                    </div>
+                                  `
+                                : null
+                            )}
                           </div>
-                        </div>
-                      `}
+                        `
+                      : inscriptionImage &&
+                        html`
+                          <div>
+                            <div className="trait-box">
+                              <p>No Metadata found</p>
+                            </div>
+                          </div>
+                        `}
+                  </div>
                 </div>
               `}
             </div>

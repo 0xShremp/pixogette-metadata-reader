@@ -2,66 +2,77 @@
   {
     "name": "Web437_IBM_CGA.woff",
     "type": "font/woff",
+    "license": "CC BY-SA 4.0",
     "tx": "https://mempool.space/tx/1de0624cc8d55981d133b788bdb6f7ca37f016b6d16461a60eb99e3ba92d6b04",
     "inscription": "1de0624cc8d55981d133b788bdb6f7ca37f016b6d16461a60eb99e3ba92d6b04i0"
   },
   {
     "name": "audio-amanda.ogg",
     "type": "audio/ogg",
+    "license": "VPL",
     "tx": "https://mempool.space/tx/785963a1cbc9dbac622107f3500392a4303eef3566fdf75d51fae78781952fda",
     "inscription": "785963a1cbc9dbac622107f3500392a4303eef3566fdf75d51fae78781952fdai0"
   },
   {
     "name": "audio-bebi.ogg",
     "type": "audio/ogg",
+    "license": "VPL",
     "tx": "https://mempool.space/tx/50e388d8f968b269a4bc283b67fed63d56b65d35209eee6acb6fe564117f1f38",
     "inscription": "50e388d8f968b269a4bc283b67fed63d56b65d35209eee6acb6fe564117f1f38i0"
   },
   {
     "name": "audio-ctcd.ogg",
     "type": "audio/ogg",
+    "license": "VPL",
     "tx": "https://mempool.space/tx/f8e4cdc1d8e023932edd2b92b7541831313132c1a1834f1be551f24219f3d4bf",
     "inscription": "f8e4cdc1d8e023932edd2b92b7541831313132c1a1834f1be551f24219f3d4bfi0"
   },
   {
     "name": "audio-dldo.ogg",
     "type": "audio/ogg",
+    "license": "VPL",
     "tx": "https://mempool.space/tx/c0d9f08b26882d520c642d03900073754c25080e3f4da0e0d9261e0798a8f15e",
     "inscription": "c0d9f08b26882d520c642d03900073754c25080e3f4da0e0d9261e0798a8f15ei0"
   },
   {
     "name": "audio-kill.ogg",
     "type": "audio/ogg",
+    "license": "VPL",
     "tx": "https://mempool.space/tx/01381d436508c61041541b66ef8bc6e70ae8dc08e189095554ad0602840934e0",
     "inscription": "01381d436508c61041541b66ef8bc6e70ae8dc08e189095554ad0602840934e0i0"
   },
   {
     "name": "audio-loop.ogg",
     "type": "audio/ogg",
+    "license": "VPL",
     "tx": "https://mempool.space/tx/917604614ee5acdc9c1ee51f1957c9aa0e101c1b168836f690544a519644fecf",
     "inscription": "917604614ee5acdc9c1ee51f1957c9aa0e101c1b168836f690544a519644fecfi0"
   },
   {
     "name": "audio-matr.ogg",
     "type": "audio/ogg",
+    "license": "VPL",
     "tx": "https://mempool.space/tx/b99397826093826e7df6ceed04de288f75da994e807805408586ca15fb2f4730",
     "inscription": "b99397826093826e7df6ceed04de288f75da994e807805408586ca15fb2f4730i0"
   },
   {
     "name": "audio-non0.ogg",
     "type": "audio/ogg",
+    "license": "VPL",
     "tx": "https://mempool.space/tx/b8b69b35122b050b1f4600f0fd31be43b3398326267a421f80dd1e22610ef7d1",
     "inscription": "b8b69b35122b050b1f4600f0fd31be43b3398326267a421f80dd1e22610ef7d1i0"
   },
   {
     "name": "audio-non1.ogg",
     "type": "audio/ogg",
+    "license": "VPL",
     "tx": "https://mempool.space/tx/9e43ee939f64e5134e52a9e00c2615441d0797f41db77fb3230cf8fccc4af60a",
     "inscription": "9e43ee939f64e5134e52a9e00c2615441d0797f41db77fb3230cf8fccc4af60ai0"
   },
   {
     "name": "audio-non2.ogg",
     "type": "audio/ogg",
+    "license": "VPL",
     "tx": "https://mempool.space/tx/a9c2ee1c716fa3f28a3f23a338d17bebb6e65b21e948ea00b571aa9ad3e674eb",
     "inscription": "a9c2ee1c716fa3f28a3f23a338d17bebb6e65b21e948ea00b571aa9ad3e674ebi0"
   },
@@ -74,78 +85,91 @@
   {
     "name": "audio-non4.ogg",
     "type": "audio/ogg",
+    "license": "VPL",
     "tx": "https://mempool.space/tx/8c16d86b60bb765ff243e9d78bab564293b610b2ebc8bcff0b6e66ba5b724e31",
     "inscription": "8c16d86b60bb765ff243e9d78bab564293b610b2ebc8bcff0b6e66ba5b724e31i0"
   },
   {
     "name": "audio-non5.ogg",
     "type": "audio/ogg",
+    "license": "VPL",
     "tx": "https://mempool.space/tx/beccdb946b1004890d1b82118115dd5269c3d0b67d8217ce552b15602f288e79",
     "inscription": "beccdb946b1004890d1b82118115dd5269c3d0b67d8217ce552b15602f288e79i0"
   },
   {
     "name": "audio-non6.ogg",
     "type": "audio/ogg",
+    "license": "VPL",
     "tx": "https://mempool.space/tx/6a6aeb894c0c6135e82c95898d3542f5056c483dbba72da1ab2af21dbe2659be",
     "inscription": "6a6aeb894c0c6135e82c95898d3542f5056c483dbba72da1ab2af21dbe2659bei0"
   },
   {
     "name": "audio-non7.ogg",
     "type": "audio/ogg",
+    "license": "VPL",
     "tx": "https://mempool.space/tx/6d21479fbd8605ee6a8ab375b2d28b79a516bc308e48ba94e29d97b69bc1a0f5",
     "inscription": "6d21479fbd8605ee6a8ab375b2d28b79a516bc308e48ba94e29d97b69bc1a0f5i0"
   },
   {
     "name": "audio-non8.ogg",
     "type": "audio/ogg",
+    "license": "VPL",
     "tx": "https://mempool.space/tx/5de12493d21d1c7bd1a142a9cf16da33c53f29e569cd6ad60cfff4d24ce11431",
     "inscription": "5de12493d21d1c7bd1a142a9cf16da33c53f29e569cd6ad60cfff4d24ce11431i0"
   },
   {
     "name": "audio-non9.ogg",
     "type": "audio/ogg",
+    "license": "VPL",
     "tx": "https://mempool.space/tx/8af8e0ab32ebe17a004d9c6e6f5175ee17f51c11b8faa6b9c9208750c6fd7fae",
     "inscription": "8af8e0ab32ebe17a004d9c6e6f5175ee17f51c11b8faa6b9c9208750c6fd7faei0"
   },
   {
     "name": "audio-plan.ogg",
     "type": "audio/ogg",
+    "license": "VPL",
     "tx": "https://mempool.space/tx/a7354c56501b5b0294d1d0813aa4ac56426944b17463d15b3e18b75b228d9431",
     "inscription": "a7354c56501b5b0294d1d0813aa4ac56426944b17463d15b3e18b75b228d9431i0"
   },
   {
     "name": "audio-rar1.ogg",
     "type": "audio/ogg",
+    "license": "VPL",
     "tx": "https://mempool.space/tx/7d0c0beab5e55dae0ccd569ef9792979f09d6e48dcd0ca3aafef19617474b1bb",
     "inscription": "7d0c0beab5e55dae0ccd569ef9792979f09d6e48dcd0ca3aafef19617474b1bbi0"
   },
   {
     "name": "audio-rar2.ogg",
     "type": "audio/ogg",
+    "license": "VPL",
     "tx": "https://mempool.space/tx/9d06e9847640454c7d802e482b70726d6e439e526c76c0689e5ae22d9968c845",
     "inscription": "9d06e9847640454c7d802e482b70726d6e439e526c76c0689e5ae22d9968c845i0"
   },
   {
     "name": "audio-rar3.ogg",
     "type": "audio/ogg",
+    "license": "VPL",
     "tx": "https://mempool.space/tx/fd29e8012913e4371af828f227c30bcadda243c160bf2b9e29598873e22e7c1c",
     "inscription": "fd29e8012913e4371af828f227c30bcadda243c160bf2b9e29598873e22e7c1ci0"
   },
   {
     "name": "audio-rich.ogg",
     "type": "audio/ogg",
+    "license": "VPL",
     "tx": "https://mempool.space/tx/1dc808aa020d7d0b66260d0278758768791aecadc69b32866a40d343dc7015fd",
     "inscription": "1dc808aa020d7d0b66260d0278758768791aecadc69b32866a40d343dc7015fdi0"
   },
   {
     "name": "audio-wait.ogg",
     "type": "audio/ogg",
+    "license": "VPL",
     "tx": "https://mempool.space/tx/b3ee9033763887a69d419cdc3191bb567128c510edfdc173cbb774f3e658c360",
     "inscription": "b3ee9033763887a69d419cdc3191bb567128c510edfdc173cbb774f3e658c360i0"
   },
   {
     "name": "pixogette-hashlist-array.min.json",
     "type": "application/json",
+    "license": "VPL",
     "tx:": "https://mempool.space/tx/be92901cdb7e358a110c50f803e05186fa897ff02b1259ba46575f68f2bb773d",
     "inscription": "be92901cdb7e358a110c50f803e05186fa897ff02b1259ba46575f68f2bb773di0"
   },
@@ -153,6 +177,7 @@
     "name": "exifr.full.umd.js.gz",
     "type": "script/javascript",
     "description": "exifr gzipped",
+    "license": "MIT",
     "tx:": "https://mempool.space/tx/2877a6fe295d15d4acf65d714dc37fa6920439aa87d44854bda8f88deea7ab22",
     "inscription": "2877a6fe295d15d4acf65d714dc37fa6920439aa87d44854bda8f88deea7ab22i0"
   },
@@ -160,6 +185,7 @@
     "name": "logo-smol.gif",
     "type": "image/gif",
     "description": "animated pixogette gif",
+    "license": "VPL",
     "tx:": "https://mempool.space/tx/a5659b698521f91102592c4c3ce88c5cd1227ab773219b07f039e311ce582159i0",
     "inscription": "a5659b698521f91102592c4c3ce88c5cd1227ab773219b07f039e311ce582159i0"
   },
@@ -167,7 +193,17 @@
     "name": "favicon.gif",
     "type": "image/gif",
     "description": "animated favicon gif",
+    "license": "VPL",
     "tx:": "https://mempool.space/tx/8f8d050802f726a0c1457377a3e888fa71ef97dbbe6a29f672c7a59f8fa39d26i0",
     "inscription": "8f8d050802f726a0c1457377a3e888fa71ef97dbbe6a29f672c7a59f8fa39d26i0"
+  },
+  {
+    "name": "shader-web-background",
+    "type": "script/javascript",
+    "description": "Displays GLSL fragment shaders as a website background. Supports offscreen buffers and floating point textures on almost any browser and hardware. Compatible with Shadertoy.",
+    "documentation": "https://github.com/xemantic/shader-web-background",
+    "license": "GPL",
+    "tx:": "https://mempool.space/tx/4935b900a0c5e3e1d898b52c6e39bcd127a1fb301afc5a3d18ca07e6a7fc5069",
+    "inscription": "4935b900a0c5e3e1d898b52c6e39bcd127a1fb301afc5a3d18ca07e6a7fc5069i0"
   }
 ]
